@@ -1,7 +1,7 @@
 #include <TGUI/TGUI.hpp>
 #include "noise_generator.h"
 
-void loadWidgets(tgui::Gui& gui) {
+void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     auto theme = std::make_shared<tgui::Theme>("TGUI/widgets/Black.txt");
 
     tgui::Button::Ptr button = theme->load("Button");
@@ -10,6 +10,7 @@ void loadWidgets(tgui::Gui& gui) {
     button->setSize({400, 45});
     button->setPosition(25, 825);
 
+    button->connect("clicked", [&](){noiseGenerator.generate();});
     gui.add(button);
 
     tgui::Label::Ptr distanceFuncLabel = theme->load("Label");
@@ -17,7 +18,7 @@ void loadWidgets(tgui::Gui& gui) {
     distanceFuncLabel->setSize({200, 25});
     distanceFuncLabel->setPosition(25, 700);
 
-    gui.add(distanceFuncLabel);
+    //gui.add(distanceFuncLabel);
 
     tgui::ComboBox::Ptr distanceFuncComboBox = theme->load("ComboBox");
     distanceFuncComboBox->setSize({200, 30});
@@ -32,14 +33,14 @@ void loadWidgets(tgui::Gui& gui) {
     distanceFuncComboBox->addItem("OrthOther");
 
     distanceFuncComboBox->setSelectedItem("Euclidean");
-    gui.add(distanceFuncComboBox);
+    //gui.add(distanceFuncComboBox);
 
     tgui::Label::Ptr colorFuncLabel = theme->load("Label");
     colorFuncLabel->setText("Color Function:");
     colorFuncLabel->setSize({200, 25});
     colorFuncLabel->setPosition(25, 740);
 
-    gui.add(colorFuncLabel);
+    //gui.add(colorFuncLabel);
 
     tgui::ComboBox::Ptr colorFuncComboBox = theme->load("ComboBox");
     colorFuncComboBox->setSize({200, 30});
@@ -52,19 +53,19 @@ void loadWidgets(tgui::Gui& gui) {
     colorFuncComboBox->addItem("Tan");
 
     colorFuncComboBox->setSelectedItem("Linear");
-    gui.add(colorFuncComboBox);
+    //gui.add(colorFuncComboBox);
 
     tgui::Label::Ptr pointsLabel = theme->load("Label");
     pointsLabel->setText("Number of Points:");
     pointsLabel->setSize({200, 25});
     pointsLabel->setPosition(25, 780);
-    gui.add(pointsLabel);
+    //gui.add(pointsLabel);
 
     tgui::Slider::Ptr slider = theme->load("Slider");
     slider->setSize({200, 20});
     slider->setPosition(220, 780);
 
-    gui.add(slider);
+    //gui.add(slider);
 
 }
 
@@ -76,7 +77,7 @@ int main()
 
     sf::RenderWindow window{{1440, 900}, "Noise Maker"};
     tgui::Gui gui{window}; // Create the gui and attach it to the window
-    loadWidgets(gui);
+    loadWidgets(noiseGenerator, gui);
 
     while (window.isOpen())
     {

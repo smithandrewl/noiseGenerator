@@ -7,7 +7,7 @@ int euclideanDistance(int x1, int y1, int x2, int y2) {
   int xDiff = x1 - x2;
   int yDiff = y1 - y2;
 
-  return sqrt((xDiff) + (yDiff));
+  return sqrt((xDiff * xDiff) + (yDiff * yDiff));
 }
 
 int manhattanDistance(int x1, int y1, int x2, int y2) {

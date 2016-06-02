@@ -7,9 +7,13 @@
 #include <SFML/System.hpp>
 #include <iostream>
 #include <vector>
+#include <functional>
 
 class NoiseGenerator {
   private:
+    std::function<int (int, int, int, int)> distanceFunc;
+    std::function<sf::Color (int)> colorFunc;
+
     sf::Uint8 pixels[1420 * 650 * 4];
     ColorFunction colorFunction;
     DistanceFunction distanceFunction;
@@ -20,6 +24,7 @@ class NoiseGenerator {
     sf::Texture texture;
     sf::Sprite sprite;
   public:
+    void randomPoints(int count);
     NoiseGenerator(sf::Vector2i topLeft);
     sf::Vector2i getTopLeft();
     void setTopLeft(sf::Vector2i topLeft);
