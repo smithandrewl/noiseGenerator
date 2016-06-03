@@ -9,12 +9,15 @@
 #include <vector>
 #include <functional>
 
+#define WIDTH 1420
+#define HEIGHT 650
+
 class NoiseGenerator {
   private:
     std::function<int (int, int, int, int)> distanceFunc;
     std::function<sf::Color (int)> colorFunc;
 
-    sf::Uint8 pixels[1420 * 650 * 4];
+    sf::Uint8 pixels[WIDTH * HEIGHT * 4];
     ColorFunction colorFunction;
     DistanceFunction distanceFunction;
     int numberOfPoints;
@@ -37,7 +40,7 @@ class NoiseGenerator {
     void draw(sf::RenderWindow& window);
     void generate();
     void save(std::ostream& stream);
-};
+};  
 
 #endif
 

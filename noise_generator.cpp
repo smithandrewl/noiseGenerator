@@ -2,6 +2,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <iostream>
+
 NoiseGenerator::NoiseGenerator(sf::Vector2i& topLeft) {
   srand(time(NULL));
   this->colorFunction = Linear;
@@ -13,13 +14,13 @@ NoiseGenerator::NoiseGenerator(sf::Vector2i& topLeft) {
   this->topLeft = topLeft;
 
   sprite.setPosition(topLeft.x, topLeft.y);
-  texture.create(1420, 650);
+  texture.create(WIDTH, HEIGHT);
   sprite.setTexture(texture);
 
   int base;
-  for(int x = 0; x < 1420; x++) {
-    for(int y = 0; y < 650; y++) {
-      base = (x + y * 1420) *4;
+  for(int x = 0; x < WIDTH; x++) {
+    for(int y = 0; y < HEIGHT; y++) {
+      base = (x + y * WIDTH) *4;
 
       pixels[base + 0] = 255;
       pixels[base + 1] = 255;
@@ -81,8 +82,8 @@ void NoiseGenerator::randomPoints(int count) {
   sf::Vector2i point;
 
   for(int i = 0; i < count; i++) {
-    point.x = rand() % 1420;
-    point.y = rand() % 640;
+    point.x = rand() % WIDTH;
+    point.y = rand() % HEIGHT;
 
     points.push_back(point);
   }
@@ -95,9 +96,9 @@ void NoiseGenerator::generate() {
   int distance;
   int base;
 
-  for(int x = 0; x < 1420; x++) {
-    for(int y = 0; y < 650; y++) {
-      base = (x + y * 1420) *4;
+  for(int x = 0; x < WIDTH; x++) {
+    for(int y = 0; y < HEIGHT; y++) {
+      base = (x + y * WIDTH) *4;
 
       current.x = x;
       current.y = y;
@@ -114,7 +115,7 @@ void NoiseGenerator::generate() {
 
     }
   }
-  
+
   texture.update(pixels);
 
 }
@@ -128,5 +129,5 @@ sf::Vector2i NoiseGenerator::getTopLeft() {
 }
 
 void NoiseGenerator::setTopLeft(sf::Vector2i& topLeft){
-this->topLeft = topLeft;
+  this->topLeft = topLeft;
 }
