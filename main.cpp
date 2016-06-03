@@ -7,21 +7,21 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     tgui::Label::Ptr distanceFuncLabel = theme->load("Label");
     distanceFuncLabel->setText("Distance Function:");
     distanceFuncLabel->setSize({200, 25});
-    distanceFuncLabel->setPosition(25, 700);
+    distanceFuncLabel->setPosition(25, 670);
 
     gui.add(distanceFuncLabel);
 
     tgui::ComboBox::Ptr distanceFuncComboBox = theme->load("ComboBox");
     distanceFuncComboBox->setSize({200, 30});
-    distanceFuncComboBox->setPosition(220, 700);
+    distanceFuncComboBox->setPosition(220, 670);
     distanceFuncComboBox->addItem("Euclidean");
     distanceFuncComboBox->addItem("Manhattan");
     distanceFuncComboBox->addItem("Chebyshev");
     distanceFuncComboBox->addItem("Other");
-    distanceFuncComboBox->addItem("OrthEuclidean");
-    distanceFuncComboBox->addItem("OrthManhattan");
-    distanceFuncComboBox->addItem("OrthChebyshev");
-    distanceFuncComboBox->addItem("OrthOther");
+    //distanceFuncComboBox->addItem("OrthEuclidean");
+    //distanceFuncComboBox->addItem("OrthManhattan");
+    //distanceFuncComboBox->addItem("OrthChebyshev");
+    //distanceFuncComboBox->addItem("OrthOther");
 
     distanceFuncComboBox->setSelectedItem("Euclidean");
     gui.add(distanceFuncComboBox);
@@ -29,13 +29,13 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     tgui::Label::Ptr colorFuncLabel = theme->load("Label");
     colorFuncLabel->setText("Color Function:");
     colorFuncLabel->setSize({200, 25});
-    colorFuncLabel->setPosition(25, 740);
+    colorFuncLabel->setPosition(25, 705);
 
     gui.add(colorFuncLabel);
 
     tgui::ComboBox::Ptr colorFuncComboBox = theme->load("ComboBox");
     colorFuncComboBox->setSize({200, 30});
-    colorFuncComboBox->setPosition(220, 740);
+    colorFuncComboBox->setPosition(220, 705);
     colorFuncComboBox->addItem("Linear");
     colorFuncComboBox->addItem("Xor");
     colorFuncComboBox->addItem("Mod");
@@ -49,12 +49,12 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     tgui::Label::Ptr pointsLabel = theme->load("Label");
     pointsLabel->setText("Number of Points:");
     pointsLabel->setSize({200, 25});
-    pointsLabel->setPosition(25, 780);
+    pointsLabel->setPosition(25, 750);
     gui.add(pointsLabel);
 
     tgui::Slider::Ptr slider = theme->load("Slider");
     slider->setSize({200, 20});
-    slider->setPosition(220, 780);
+    slider->setPosition(220, 750);
     slider->setMinimum(5);
     slider->setMaximum(500);
     slider->setValue(5);
@@ -77,6 +77,16 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
 
         if(colorFunction == "Linear") {
           colorFunc = Linear;
+        } else if(colorFunction == "Xor") {
+          colorFunc = Xor;
+        } else if(colorFunction == "Mod") {
+          colorFunc = Mod;
+        } else if(colorFunction == "And") {
+          colorFunc = And;
+        } else if(colorFunction == "Sin") {
+          colorFunc = Sin;
+        } else if(colorFunction == "Tan") {
+          colorFunc = Tan;
         }
         noiseGenerator.setColorFunction(colorFunc);  
 

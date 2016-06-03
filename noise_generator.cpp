@@ -17,20 +17,8 @@ NoiseGenerator::NoiseGenerator(sf::Vector2i& topLeft) {
   texture.create(WIDTH, HEIGHT);
   sprite.setTexture(texture);
 
-  int base;
-  for(int x = 0; x < WIDTH; x++) {
-    for(int y = 0; y < HEIGHT; y++) {
-      base = (x + y * WIDTH) *4;
-
-      pixels[base + 0] = 255;
-      pixels[base + 1] = 255;
-      pixels[base + 2] = 255;
-      pixels[base + 3] = 255;
-    }
-  }
-
-  numberOfPoints = 30;
-  texture.update(pixels);
+  numberOfPoints = 5;
+  generate();
 }
 
 ColorFunction NoiseGenerator::getColorFunction() {
@@ -39,6 +27,27 @@ ColorFunction NoiseGenerator::getColorFunction() {
 
 void NoiseGenerator::setColorFunction(ColorFunction& colorFunction) {
   this->colorFunction = colorFunction;
+
+  switch(colorFunction) {
+    case Linear:
+      colorFunc = linearColor;
+      break;
+    case Xor:
+      colorFunc = xorColor;
+      break;
+    case Mod:
+      colorFunc = modColor;
+      break;
+    case And:
+      colorFunc = andColor;
+      break;
+    case Sin:
+      colorFunc = sinColor;
+      break;
+    case Tan:
+      colorFunc = tanColor;
+      break;
+  }
 }
 
 DistanceFunction NoiseGenerator::getDistanceFunction() {
