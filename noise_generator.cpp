@@ -136,7 +136,7 @@ void NoiseGenerator::generate() {
   randomPoints(numberOfPoints);
 
   #pragma omp parallel private (current, closest, distance, color, base) shared(pixels)
-  # pragma omp for
+  #pragma omp for
   for(int x = 0; x < WIDTH; x++) {
     for(int y = 0; y < HEIGHT; y++) {
       base = (x + y * WIDTH) * 4;
