@@ -29,6 +29,7 @@ NoiseGenerator::NoiseGenerator(sf::Vector2i& topLeft) {
     }
   }
 
+  numberOfPoints = 30;
   texture.update(pixels);
 }
 
@@ -46,6 +47,21 @@ DistanceFunction NoiseGenerator::getDistanceFunction() {
 
 void NoiseGenerator::setDistanceFunction(DistanceFunction& distanceFunction) {
   this->distanceFunction = distanceFunction;
+
+  switch(distanceFunction) {
+    case Euclidean:
+      this->distanceFunc = euclideanDistance;
+      break;
+    case Manhattan:
+      this->distanceFunc = manhattanDistance;
+      break;
+    case Chebyshev:
+      this->distanceFunc = chebyshevDistance;
+      break;
+    case Other:
+      this->distanceFunc = other;
+      break;
+  }
 }
 
 int NoiseGenerator::getNumberOfPoints() {
@@ -89,7 +105,7 @@ void NoiseGenerator::randomPoints(int count) {
   }
 }
 void NoiseGenerator::generate() {
-  randomPoints(300);
+  randomPoints(numberOfPoints);
   sf::Vector2i closest;
   sf::Color color;
   sf::Vector2i current;
