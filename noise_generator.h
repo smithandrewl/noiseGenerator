@@ -21,8 +21,8 @@ class NoiseGenerator {
     ColorFunction    colorFunction;
     DistanceFunction distanceFunction;
 
-    std::function<int (int, int, int, int)> distanceFunc;
-    std::function<sf::Color (int)>          colorFunc;
+    DistanceFunc distanceFunc;
+    ColorFunc          colorFunc;
     std::vector<sf::Vector2i>               points;
 
     sf::Uint8    pixels[WIDTH * HEIGHT * 4];

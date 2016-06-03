@@ -1,6 +1,10 @@
 #ifndef DISTANCE_H
 #define DISTANCE_H
 
+#include<functional>
+
+typedef std::function<int (int, int, int, int)> DistanceFunc;
+
 enum DistanceFunction {
   Euclidean,
   Manhattan,

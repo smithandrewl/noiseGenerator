@@ -79,3 +79,18 @@ sf::Color tanModSinColor(value) {
 
     return fin;
 }*/
+    /*
+    if(colorFunction == "Linear") {
+          colorFunc = Linear;
+        } else if(colorFunction == "Xor") {
+          colorFunc = Xor;
+        } else if(colorFunction == "Mod") {
+          colorFunc = Mod;
+        } else if(colorFunction == "And") {
+          colorFunc = And;
+        } else if(colorFunction == "Sin") {
+          colorFunc = Sin;
+        } else if(colorFunction == "Tan") {
+          colorFunc = Tan;
+        }
+    */

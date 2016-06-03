@@ -3,6 +3,9 @@
 
 #include <SFML/Graphics.hpp>
 #include <cmath>
+#include <functional>
+
+typedef std::function<sf::Color (int)> ColorFunc;
 
 enum ColorFunction {
   Linear,
