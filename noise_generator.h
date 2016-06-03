@@ -22,25 +22,25 @@ class NoiseGenerator {
     DistanceFunction distanceFunction;
     int numberOfPoints;
     std::vector<sf::Vector2i> points;
-    sf::Vector2i closestPoint(sf::Vector2i& pixelLocation);
+    void closestPoint(const sf::Vector2i& pixelLocation, sf::Vector2i& outLocation);
     sf::Vector2i topLeft;
     sf::Texture texture;
     sf::Sprite sprite;
   public:
     void randomPoints(int count);
-    NoiseGenerator(sf::Vector2i& topLeft);
+    NoiseGenerator(const sf::Vector2i& topLeft);
     sf::Vector2i getTopLeft();
-    void setTopLeft(sf::Vector2i& topLeft);
+    void setTopLeft(const sf::Vector2i& topLeft);
     ColorFunction getColorFunction();
-    void setColorFunction(ColorFunction& colorFunction);
+    void setColorFunction(const ColorFunction& colorFunction);
     DistanceFunction getDistanceFunction();
-    void setDistanceFunction(DistanceFunction& distanceFunction);
+    void setDistanceFunction(const DistanceFunction& distanceFunction);
     int getNumberOfPoints();
     void setNumberOfPoints(int numberOfPoints);
     void draw(sf::RenderWindow& window);
     void generate();
     void save(std::ostream& stream);
-};  
+};
 
 #endif
 

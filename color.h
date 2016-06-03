@@ -2,6 +2,7 @@
 #define COLOR_H
 
 #include <SFML/Graphics.hpp>
+#include <cmath>
 enum ColorFunction {
   Linear,
   Xor,

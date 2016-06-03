@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <iostream>
 
-NoiseGenerator::NoiseGenerator(sf::Vector2i& topLeft) {
+NoiseGenerator::NoiseGenerator(const sf::Vector2i& topLeft) {
   srand(time(NULL));
   this->colorFunction = Linear;
   this->distanceFunction = Euclidean;
@@ -25,7 +25,7 @@ ColorFunction NoiseGenerator::getColorFunction() {
   return colorFunction;
 }
 
-void NoiseGenerator::setColorFunction(ColorFunction& colorFunction) {
+void NoiseGenerator::setColorFunction(const ColorFunction& colorFunction) {
   this->colorFunction = colorFunction;
 
   switch(colorFunction) {
@@ -54,7 +54,7 @@ DistanceFunction NoiseGenerator::getDistanceFunction() {
   return distanceFunction;
 }
 
-void NoiseGenerator::setDistanceFunction(DistanceFunction& distanceFunction) {
+void NoiseGenerator::setDistanceFunction(const DistanceFunction& distanceFunction) {
   this->distanceFunction = distanceFunction;
 
   switch(distanceFunction) {
@@ -81,8 +81,8 @@ void NoiseGenerator::setNumberOfPoints(int numberOfPoints) {
   this->numberOfPoints = numberOfPoints;
 }
 
-sf::Vector2i NoiseGenerator::closestPoint(sf::Vector2i& pixelLocation) {
-  sf::Vector2i closestPoint = points[0];
+void NoiseGenerator::closestPoint(const sf::Vector2i& pixelLocation, sf::Vector2i& outLocation) {
+  sf::Vector2i* closestPoint = &points[0];
   int closestDist = 90000;
 
   for(int i = 0; i < points.size(); i++) {
@@ -90,11 +90,12 @@ sf::Vector2i NoiseGenerator::closestPoint(sf::Vector2i& pixelLocation) {
 
     if(dist < closestDist) {
       closestDist  = dist;
-      closestPoint = points[i];
+      closestPoint = &points[i];
     }
   }
 
-  return closestPoint;
+  outLocation.x = closestPoint->x;
+  outLocation.y = closestPoint->y;
 }
 
 void NoiseGenerator::draw(sf::RenderWindow& window) {
@@ -103,7 +104,7 @@ void NoiseGenerator::draw(sf::RenderWindow& window) {
 
 void NoiseGenerator::randomPoints(int count) {
   points.clear();
-
+  points.reserve(count);
   sf::Vector2i point;
 
   for(int i = 0; i < count; i++) {
@@ -123,11 +124,11 @@ void NoiseGenerator::generate() {
 
   for(int x = 0; x < WIDTH; x++) {
     for(int y = 0; y < HEIGHT; y++) {
-      base = (x + y * WIDTH) *4;
+      base = (x + y * WIDTH) * 4;
 
       current.x = x;
       current.y = y;
-      closest = closestPoint(current);
+      closestPoint(current, closest);
 
       distance = distanceFunc(x, y, closest.x, closest.y);
 
@@ -153,6 +154,6 @@ sf::Vector2i NoiseGenerator::getTopLeft() {
   return topLeft;
 }
 
-void NoiseGenerator::setTopLeft(sf::Vector2i& topLeft){
+void NoiseGenerator::setTopLeft(const sf::Vector2i& topLeft){
   this->topLeft = topLeft;
 }
