@@ -4,7 +4,7 @@ all: distance.o color.o noise_generator.o
 	$(CC) -Wall -std=c++11 $(CFLAGS) distance.o color.o noise_generator.o main.cpp -o noiseMaker
 clean:
 	rm noiseMaker
-	rm -rf noiseMaker *.o
+	rm -rf *.o
 
 noise_generator.o: distance.o color.o
 	$(CC) -O3 -Wall -std=c++11 -c noise_generator.cpp

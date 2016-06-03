@@ -78,22 +78,20 @@ void NoiseGenerator::draw(sf::RenderWindow& window) {
 void NoiseGenerator::randomPoints(int count) {
   points.clear();
 
-  int x;
-  int y;
-  Vector2i point;
+  sf::Vector2i point;
+
   for(int i = 0; i < count; i++) {
-    x = rand() % 1420;
-    y = rand() % 640;
-    point.x = x;
-    point.y = y;
+    point.x = rand() % 1420;
+    point.y = rand() % 640;
 
     points.push_back(point);
   }
 }
 void NoiseGenerator::generate() {
-  randomPoints(30);
+  randomPoints(300);
   sf::Vector2i closest;
   sf::Color color;
+  sf::Vector2i current;
   int distance;
   int base;
 
@@ -101,7 +99,9 @@ void NoiseGenerator::generate() {
     for(int y = 0; y < 650; y++) {
       base = (x + y * 1420) *4;
 
-      closest = closestPoint({x, y});
+      current.x = x;
+      current.y = y;
+      closest = closestPoint(current);
 
       distance = distanceFunc(x, y, closest.x, closest.y);
 
@@ -114,6 +114,7 @@ void NoiseGenerator::generate() {
 
     }
   }
+  
   texture.update(pixels);
 
 }
