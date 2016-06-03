@@ -1,19 +1,23 @@
 #include <TGUI/TGUI.hpp>
 #include "noise_generator.h"
 
-#define MIN_POINTS 30
+#define MIN_POINTS   30
 #define MAX_POINTS 1000
 
 void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     auto theme = std::make_shared<tgui::Theme>("TGUI/widgets/Black.txt");
 
+//============ Label for Distance Function Combobox =================
     tgui::Label::Ptr distanceFuncLabel = theme->load("Label");
+
     distanceFuncLabel->setText("Distance Function:");
     distanceFuncLabel->setSize({200, 25});
     distanceFuncLabel->setPosition(25, 670);
 
     gui.add(distanceFuncLabel);
+// =================================================================
 
+// =========== Distance Function Combobox ==========================
     tgui::ComboBox::Ptr distanceFuncComboBox = theme->load("ComboBox");
     distanceFuncComboBox->setSize({200, 30});
     distanceFuncComboBox->setPosition(220, 670);
@@ -28,14 +32,19 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
 
     distanceFuncComboBox->setSelectedItem("Euclidean");
     gui.add(distanceFuncComboBox);
+// ================================================================
 
+
+// =========== Label for Color Function Combobox ==================
     tgui::Label::Ptr colorFuncLabel = theme->load("Label");
     colorFuncLabel->setText("Color Function:");
     colorFuncLabel->setSize({200, 25});
     colorFuncLabel->setPosition(25, 705);
 
     gui.add(colorFuncLabel);
+// ================================================================
 
+// ========== Color Function Combobox =============================
     tgui::ComboBox::Ptr colorFuncComboBox = theme->load("ComboBox");
     colorFuncComboBox->setSize({200, 30});
     colorFuncComboBox->setPosition(220, 705);
@@ -48,13 +57,17 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
 
     colorFuncComboBox->setSelectedItem("Linear");
     gui.add(colorFuncComboBox);
+// ===============================================================
 
+// ========= Label for Number of Points Slider ===================
     tgui::Label::Ptr pointsLabel = theme->load("Label");
     pointsLabel->setText("Number of Points:");
     pointsLabel->setSize({200, 25});
     pointsLabel->setPosition(25, 750);
     gui.add(pointsLabel);
+// ===============================================================
 
+// ======== Number of Points Slider ==============================
     tgui::Slider::Ptr slider = theme->load("Slider");
     slider->setSize({200, 20});
     slider->setPosition(220, 750);
@@ -62,7 +75,9 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     slider->setMaximum(MAX_POINTS);
     slider->setValue(MIN_POINTS);
     gui.add(slider);
+// ===============================================================
 
+// ======== Generate Button ======================================
     tgui::Button::Ptr button = theme->load("Button");
 
     button->setText("Generate");
@@ -110,7 +125,7 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     });
 
     gui.add(button);
-
+// ===============================================================
 }
 
 int main()

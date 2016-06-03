@@ -7,7 +7,10 @@ int euclideanDistance(int x1, int y1, int x2, int y2) {
   int xDiff = x1 - x2;
   int yDiff = y1 - y2;
 
-  return sqrt((xDiff * xDiff) + (yDiff * yDiff));
+  return sqrt(
+    (xDiff * xDiff) +
+    (yDiff * yDiff)
+  );
 }
 
 int manhattanDistance(int x1, int y1, int x2, int y2) {
@@ -18,7 +21,10 @@ int manhattanDistance(int x1, int y1, int x2, int y2) {
 }
 
 int chebyshevDistance(int x1, int y1, int x2, int y2) {
-  return std::fmax(abs(x1 - x2), abs(y1 - y2));
+  return std::fmax(
+    abs(x1 - x2),
+    abs(y1 - y2)
+  );
 }
 
 int other(int x1, int y1, int x2, int y2) {

@@ -6,10 +6,11 @@
 
 NoiseGenerator::NoiseGenerator(const sf::Vector2i& topLeft, int numPoints) {
   srand(time(NULL));
-  this->colorFunction = Linear;
-  this->distanceFunction = Euclidean;
 
-  colorFunc = linearColor;
+  colorFunction    = Linear;
+  distanceFunction = Euclidean;
+
+  colorFunc    = linearColor;
   distanceFunc = euclideanDistance;
 
   this->topLeft = topLeft;
@@ -19,6 +20,7 @@ NoiseGenerator::NoiseGenerator(const sf::Vector2i& topLeft, int numPoints) {
   sprite.setTexture(texture);
 
   numberOfPoints = numPoints;
+
   generate();
 }
 
@@ -84,10 +86,16 @@ void NoiseGenerator::setNumberOfPoints(int numberOfPoints) {
 
 void NoiseGenerator::closestPoint(const sf::Vector2i& pixelLocation, sf::Vector2i& outLocation) {
   sf::Vector2i* closestPoint = &points[0];
+
   int closestDist = 90000;
 
   for(int i = 0; i < points.size(); i++) {
-    int dist = euclideanDistance(pixelLocation.x, pixelLocation.y, points[i].x, points[i].y);
+    int dist = euclideanDistance(
+      pixelLocation.x,
+      pixelLocation.y,
+      points[i].x,
+      points[i].y
+    );
 
     if(dist < closestDist) {
       closestDist  = dist;
@@ -104,9 +112,10 @@ void NoiseGenerator::draw(sf::RenderWindow& window) {
 }
 
 void NoiseGenerator::randomPoints(int count) {
+  sf::Vector2i point;
+
   points.clear();
   points.reserve(count);
-  sf::Vector2i point;
 
   for(int i = 0; i < count; i++) {
     point.x = rand() % WIDTH;
@@ -115,16 +124,18 @@ void NoiseGenerator::randomPoints(int count) {
     points.push_back(point);
   }
 }
+
 void NoiseGenerator::generate() {
-  randomPoints(numberOfPoints);
-  sf::Vector2i closest;
-  sf::Color color;
-  sf::Vector2i current;
   int distance;
   int base;
 
-  #pragma omp parallel private (current, closest, distance, color, base) shared(pixels)
+  sf::Color    color;
+  sf::Vector2i closest;
+  sf::Vector2i current;
 
+  randomPoints(numberOfPoints);
+
+  #pragma omp parallel private (current, closest, distance, color, base) shared(pixels)
   # pragma omp for
   for(int x = 0; x < WIDTH; x++) {
     for(int y = 0; y < HEIGHT; y++) {
@@ -132,6 +143,7 @@ void NoiseGenerator::generate() {
 
       current.x = x;
       current.y = y;
+
       closestPoint(current, closest);
 
       distance = distanceFunc(x, y, closest.x, closest.y);
