@@ -2,6 +2,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <iostream>
+#include <omp.h>
 
 NoiseGenerator::NoiseGenerator(const sf::Vector2i& topLeft) {
   srand(time(NULL));
@@ -122,6 +123,9 @@ void NoiseGenerator::generate() {
   int distance;
   int base;
 
+  #pragma omp parallel private (current, closest, distance, color, base) shared(pixels)
+
+  # pragma omp for
   for(int x = 0; x < WIDTH; x++) {
     for(int y = 0; y < HEIGHT; y++) {
       base = (x + y * WIDTH) * 4;
