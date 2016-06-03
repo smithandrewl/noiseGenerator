@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <cmath>
+
 enum ColorFunction {
   Linear,
   Xor,
@@ -18,4 +19,5 @@ sf::Color modColor(int distance);
 sf::Color andColor(int distance);
 sf::Color sinColor(int distance);
 sf::Color tanColor(int distance);
+
 #endif
