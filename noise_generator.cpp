@@ -4,7 +4,7 @@
 #include <iostream>
 #include <omp.h>
 
-NoiseGenerator::NoiseGenerator(const sf::Vector2i& topLeft) {
+NoiseGenerator::NoiseGenerator(const sf::Vector2i& topLeft, int numPoints) {
   srand(time(NULL));
   this->colorFunction = Linear;
   this->distanceFunction = Euclidean;
@@ -18,7 +18,7 @@ NoiseGenerator::NoiseGenerator(const sf::Vector2i& topLeft) {
   texture.create(WIDTH, HEIGHT);
   sprite.setTexture(texture);
 
-  numberOfPoints = 5;
+  numberOfPoints = numPoints;
   generate();
 }
 

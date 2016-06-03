@@ -1,6 +1,9 @@
 #include <TGUI/TGUI.hpp>
 #include "noise_generator.h"
 
+#define MIN_POINTS 30
+#define MAX_POINTS 1000
+
 void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     auto theme = std::make_shared<tgui::Theme>("TGUI/widgets/Black.txt");
 
@@ -55,9 +58,9 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     tgui::Slider::Ptr slider = theme->load("Slider");
     slider->setSize({200, 20});
     slider->setPosition(220, 750);
-    slider->setMinimum(5);
-    slider->setMaximum(500);
-    slider->setValue(5);
+    slider->setMinimum(MIN_POINTS);
+    slider->setMaximum(MAX_POINTS);
+    slider->setValue(MIN_POINTS);
     gui.add(slider);
 
     tgui::Button::Ptr button = theme->load("Button");
@@ -67,7 +70,7 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     button->setPosition(25, 825);
 
     button->connect("clicked", [&noiseGenerator, slider, colorFuncComboBox, distanceFuncComboBox]() {
-        
+
         // set color function
         std::string colorFunction = colorFuncComboBox->getSelectedItem();
         std::string distanceFunction = distanceFuncComboBox->getSelectedItem();
@@ -88,7 +91,7 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
         } else if(colorFunction == "Tan") {
           colorFunc = Tan;
         }
-        noiseGenerator.setColorFunction(colorFunc);  
+        noiseGenerator.setColorFunction(colorFunc);
 
         if(distanceFunction == "Euclidean") {
             distanceFunc = Euclidean;
@@ -101,7 +104,7 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
         }
         noiseGenerator.setDistanceFunction(distanceFunc);
         // set distance function
-        
+
         noiseGenerator.setNumberOfPoints(slider->getValue());
         noiseGenerator.generate();
     });
@@ -110,13 +113,11 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
 
 }
 
-
-
 int main()
 {
     sf::Vector2i topLeft(10,10);
 
-    NoiseGenerator noiseGenerator(topLeft);
+    NoiseGenerator noiseGenerator(topLeft, MIN_POINTS);
 
     sf::RenderWindow window{{1440, 900}, "Noise Maker"};
     tgui::Gui gui{window}; // Create the gui and attach it to the window

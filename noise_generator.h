@@ -28,7 +28,7 @@ class NoiseGenerator {
     sf::Sprite sprite;
   public:
     void randomPoints(int count);
-    NoiseGenerator(const sf::Vector2i& topLeft);
+    NoiseGenerator(const sf::Vector2i& topLeft, int numPoints);
     sf::Vector2i getTopLeft();
     void setTopLeft(const sf::Vector2i& topLeft);
     ColorFunction getColorFunction();
