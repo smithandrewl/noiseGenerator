@@ -128,6 +128,7 @@ void NoiseGenerator::randomPoints(int count) {
 void NoiseGenerator::generate() {
   int distance;
   int base;
+  int normalized;
 
   sf::Color    color;
   sf::Vector2i closest;
@@ -148,7 +149,8 @@ void NoiseGenerator::generate() {
 
       distance = distanceFunc(x, y, closest.x, closest.y);
 
-      color = colorFunc(distance);
+      normalized = std::max(0, std::min(255, distance));
+      color = colorFunc(normalized);
 
       pixels[base + 0] = color.r;
       pixels[base + 1] = color.g;

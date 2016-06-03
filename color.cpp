@@ -1,14 +1,10 @@
 #include "color.h"
 
-sf::Color linearColor(int distance) {
-  int value = std::min(255, distance);
-
+sf::Color linearColor(int value) {
   return sf::Color(value, value, value, 255);
 }
 
-sf::Color xorColor(int distance) {
-  int value = std::min(255, distance);
-
+sf::Color xorColor(int value) {
   return sf::Color(
     value ^ 64,
     value ^ 32,
@@ -17,9 +13,7 @@ sf::Color xorColor(int distance) {
   );
 }
 
-sf::Color modColor(int distance) {
-  int value = std::min(255, distance);
-
+sf::Color modColor(int value) {
   return sf::Color(
     value %  70,
     value %   8,
@@ -28,9 +22,7 @@ sf::Color modColor(int distance) {
   );
 }
 
-sf::Color andColor(int distance) {
-  int value = std::min(255, distance);
-
+sf::Color andColor(int value) {
   return sf::Color(
     value &   3,
     value &  80,
@@ -39,8 +31,7 @@ sf::Color andColor(int distance) {
   );
 }
 
-sf::Color sinColor(int distance) {
-  int value     = std::min(255, distance);
+sf::Color sinColor(int value) {
   int gammaAdj  = 70;
 
   float redPart   = 10.9;
@@ -55,9 +46,7 @@ sf::Color sinColor(int distance) {
   );
 }
 
-sf::Color tanColor(int distance) {
-  int value = std::min(255, distance);
-
+sf::Color tanColor(int value) {
   return sf::Color(
     tan(value * 30.00) * 100,
     tan(value * 25.00) * 100,

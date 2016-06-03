@@ -16,11 +16,11 @@ enum ColorFunction {
   Tan
 };
 
-sf::Color linearColor(int distance);
-sf::Color xorColor(int distance);
-sf::Color modColor(int distance);
-sf::Color andColor(int distance);
-sf::Color sinColor(int distance);
-sf::Color tanColor(int distance);
+sf::Color linearColor(int value);
+sf::Color xorColor(int value);
+sf::Color modColor(int value);
+sf::Color andColor(int value);
+sf::Color sinColor(int value);
+sf::Color tanColor(int value);
 
 #endif
