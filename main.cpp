@@ -11,6 +11,7 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     panel->setPosition({300, 750});
     panel->setSize(925, 170);
     gui.add(panel);
+    
 //============ Label for Distance Function Combobox =================
     tgui::Label::Ptr distanceFuncLabel = theme->load("Label");
 

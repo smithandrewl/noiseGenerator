@@ -84,27 +84,26 @@ void NoiseGenerator::setNumberOfPoints(int numberOfPoints) {
   this->numberOfPoints = numberOfPoints;
 }
 
-void NoiseGenerator::closestPoint(const sf::Vector2i& pixelLocation, sf::Vector2i& outLocation) {
-  sf::Vector2i* closestPoint = &points[0];
+int NoiseGenerator::closestPoint(const sf::Vector2i& pixelLocation) {
 
-  int closestDist = 90000;
+  int closestDist = 255;
 
   for(int i = 0; i < points.size(); i++) {
-    int dist = euclideanDistance(
-      pixelLocation.x,
-      pixelLocation.y,
-      points[i].x,
-      points[i].y
-    );
+    int xDiff = pixelLocation.x - points[i].x;
+    int yDiff = pixelLocation.y - points[i].y;
 
-    if(dist < closestDist) {
-      closestDist  = dist;
-      closestPoint = &points[i];
+    bool inRange = (xDiff * xDiff) + (yDiff * yDiff) < 65025;
+
+    if(inRange) {
+      int dist = distanceFunc(pixelLocation.x, pixelLocation.y, points[i].x, points[i].y);
+
+      if(dist < closestDist) {
+        closestDist  = dist;
+      }
     }
   }
 
-  outLocation.x = closestPoint->x;
-  outLocation.y = closestPoint->y;
+  return closestDist;
 }
 
 void NoiseGenerator::draw(sf::RenderWindow& window) {
@@ -145,12 +144,8 @@ void NoiseGenerator::generate() {
       current.x = x;
       current.y = y;
 
-      closestPoint(current, closest);
-
-      distance = distanceFunc(x, y, closest.x, closest.y);
-
-      normalized = std::max(0, std::min(255, distance));
-      color = colorFunc(normalized);
+      distance = closestPoint(current);
+      color = colorFunc(distance);
 
       pixels[base + 0] = color.r;
       pixels[base + 1] = color.g;

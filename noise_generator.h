@@ -30,7 +30,7 @@ class NoiseGenerator {
     sf::Texture  texture;
     sf::Sprite   sprite;
 
-    void closestPoint(const sf::Vector2i& pixelLocation, sf::Vector2i& outLocation);
+    int closestPoint(const sf::Vector2i& pixelLocation);
 
   public:
     NoiseGenerator(const sf::Vector2i& topLeft, int numPoints);
