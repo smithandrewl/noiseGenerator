@@ -1,4 +1,4 @@
-CC=g++
+	CC=g++
 CFLAGS= -fopenmp -O3 -Wall -std=c++11
 
 all: distance.o color.o noise_generator.o

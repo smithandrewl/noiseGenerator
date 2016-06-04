@@ -11,8 +11,8 @@
 #include "distance.h"
 #include "color.h"
 
-#define WIDTH 1420
-#define HEIGHT 650
+#define WIDTH 1680
+#define HEIGHT 1050
 
 class NoiseGenerator {
   private:

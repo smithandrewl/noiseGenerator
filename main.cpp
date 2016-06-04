@@ -7,20 +7,24 @@
 void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     auto theme = std::make_shared<tgui::Theme>("TGUI/widgets/Black.txt");
 
+    tgui::Panel::Ptr panel = theme->load("Panel");
+    panel->setPosition({300, 750});
+    panel->setSize(925, 170);
+    gui.add(panel);
 //============ Label for Distance Function Combobox =================
     tgui::Label::Ptr distanceFuncLabel = theme->load("Label");
 
     distanceFuncLabel->setText("Distance Function:");
     distanceFuncLabel->setSize({200, 25});
-    distanceFuncLabel->setPosition(25, 670);
+    distanceFuncLabel->setPosition(25, 25);
 
-    gui.add(distanceFuncLabel);
+    panel->add(distanceFuncLabel);
 // =================================================================
 
 // =========== Distance Function Combobox ==========================
     tgui::ComboBox::Ptr distanceFuncComboBox = theme->load("ComboBox");
     distanceFuncComboBox->setSize({200, 30});
-    distanceFuncComboBox->setPosition(220, 670);
+    distanceFuncComboBox->setPosition(220, 25);
     distanceFuncComboBox->addItem("Euclidean");
     distanceFuncComboBox->addItem("Manhattan");
     distanceFuncComboBox->addItem("Chebyshev");
@@ -31,7 +35,7 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     //distanceFuncComboBox->addItem("OrthOther");
 
     distanceFuncComboBox->setSelectedItem("Euclidean");
-    gui.add(distanceFuncComboBox);
+    panel->add(distanceFuncComboBox);
 // ================================================================
 
 
@@ -39,15 +43,15 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     tgui::Label::Ptr colorFuncLabel = theme->load("Label");
     colorFuncLabel->setText("Color Function:");
     colorFuncLabel->setSize({200, 25});
-    colorFuncLabel->setPosition(25, 705);
+    colorFuncLabel->setPosition(25, 75);
 
-    gui.add(colorFuncLabel);
+    panel->add(colorFuncLabel);
 // ================================================================
 
 // ========== Color Function Combobox =============================
     tgui::ComboBox::Ptr colorFuncComboBox = theme->load("ComboBox");
     colorFuncComboBox->setSize({200, 30});
-    colorFuncComboBox->setPosition(220, 705);
+    colorFuncComboBox->setPosition(220, 75);
     colorFuncComboBox->addItem("Linear");
     colorFuncComboBox->addItem("Xor");
     colorFuncComboBox->addItem("Mod");
@@ -56,25 +60,25 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     colorFuncComboBox->addItem("Tan");
 
     colorFuncComboBox->setSelectedItem("Linear");
-    gui.add(colorFuncComboBox);
+    panel->add(colorFuncComboBox);
 // ===============================================================
 
 // ========= Label for Number of Points Slider ===================
     tgui::Label::Ptr pointsLabel = theme->load("Label");
     pointsLabel->setText("Number of Points:");
     pointsLabel->setSize({200, 25});
-    pointsLabel->setPosition(25, 750);
-    gui.add(pointsLabel);
+    pointsLabel->setPosition(25, 125);
+    panel->add(pointsLabel);
 // ===============================================================
 
 // ======== Number of Points Slider ==============================
     tgui::Slider::Ptr slider = theme->load("Slider");
     slider->setSize({200, 20});
-    slider->setPosition(220, 750);
+    slider->setPosition(220, 125);
     slider->setMinimum(MIN_POINTS);
     slider->setMaximum(MAX_POINTS);
     slider->setValue(MIN_POINTS);
-    gui.add(slider);
+    panel->add(slider);
 // ===============================================================
 
 // ======== Generate Button ======================================
@@ -82,7 +86,7 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
 
     button->setText("Generate");
     button->setSize({400, 45});
-    button->setPosition(25, 825);
+    button->setPosition(440, 25);
 
     button->connect("clicked", [&noiseGenerator, slider, colorFuncComboBox, distanceFuncComboBox]() {
 
@@ -124,7 +128,7 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
         noiseGenerator.generate();
     });
 
-    gui.add(button);
+    panel->add(button);
 // ===============================================================
 }
 
@@ -134,7 +138,7 @@ int main()
 
     NoiseGenerator noiseGenerator(topLeft, MIN_POINTS);
 
-    sf::RenderWindow window{{1440, 900}, "Noise Maker"};
+    sf::RenderWindow window{{1680, 1050}, "Noise Maker"};
     tgui::Gui gui{window}; // Create the gui and attach it to the window
     loadWidgets(noiseGenerator, gui);
 
@@ -151,8 +155,9 @@ int main()
 
         window.clear(sf::Color(19, 17, 17));
 
-        gui.draw(); // Draw all widgets
+        
         noiseGenerator.draw(window);
+        gui.draw(); // Draw all widgets
         window.display();
     }
 }
