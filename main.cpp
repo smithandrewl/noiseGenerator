@@ -1,7 +1,7 @@
 #include <TGUI/TGUI.hpp>
 #include "noise_generator.h"
 
-#define MIN_POINTS   30
+#define MIN_POINTS   1
 #define MAX_POINTS 1000
 
 void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
@@ -9,7 +9,7 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
 
     tgui::Panel::Ptr panel = theme->load("Panel");
     panel->setPosition({300, 750});
-    panel->setSize(925, 250);
+    panel->setSize(860, 250);
     gui.add(panel);
 
 //============ Label for Distance Function Combobox =================
@@ -78,7 +78,7 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     slider->setPosition(220, 125);
     slider->setMinimum(MIN_POINTS);
     slider->setMaximum(MAX_POINTS);
-    slider->setValue(MIN_POINTS);
+    slider->setValue(10);
     panel->add(slider);
 // ===============================================================
 
@@ -86,7 +86,7 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     tgui::Label::Ptr invertDistanceLabel = theme->load("Label");
     invertDistanceLabel->setText("Invert Distance:");
     invertDistanceLabel->setSize({200, 25});
-    invertDistanceLabel->setPosition({25, 175});
+    invertDistanceLabel->setPosition({25, 170});
 
     panel->add(invertDistanceLabel);
 
@@ -96,7 +96,7 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     tgui::CheckBox::Ptr invertCheckbox = theme->load("CheckBox");
 
     invertCheckbox->setSize({25, 20});
-    invertCheckbox->setPosition({220, 175});
+    invertCheckbox->setPosition({220, 170});
     panel->add(invertCheckbox);
 
 // ===============================================================
@@ -105,7 +105,7 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
      tgui::Label::Ptr invertColorsLabel = theme->load("Label");
      invertColorsLabel->setText("Invert Colors:");
      invertColorsLabel->setSize({200, 25});
-     invertColorsLabel->setPosition({25, 200});
+     invertColorsLabel->setPosition({25, 210});
 
      panel->add(invertColorsLabel);
 // ===============================================================
@@ -113,7 +113,7 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
 // ======== Invert Colors Checkbox ===============================
    tgui::CheckBox::Ptr invertColorsCheckbox = theme->load("CheckBox");
    invertColorsCheckbox->setSize({25, 20});
-   invertColorsCheckbox->setPosition({220, 200});
+   invertColorsCheckbox->setPosition({220, 210});
 
    panel->add(invertColorsCheckbox);
 // ===============================================================
@@ -185,7 +185,8 @@ int main()
 {
     sf::Vector2i topLeft(10,10);
 
-    NoiseGenerator noiseGenerator(topLeft, MIN_POINTS);
+    NoiseGenerator noiseGenerator(topLeft, 10);
+
 
     sf::RenderWindow window{{1680, 1050}, "Noise Maker"};
     tgui::Gui gui{window}; // Create the gui and attach it to the window
