@@ -164,6 +164,12 @@ void NoiseGenerator::generate() {
         color = colorFunc(distance);
       }
 
+      if(getInvertColors()) {
+        color.r = 255 - color.r;
+        color.g = 255 - color.g;
+        color.b = 255 - color.b;
+      }
+
       pixels[base + 0] = color.r;
       pixels[base + 1] = color.g;
       pixels[base + 2] = color.b;
@@ -195,4 +201,13 @@ bool NoiseGenerator::getInverted() {
 void NoiseGenerator::setInverted(bool inverted) {
   this->inverted = inverted;
 }
+
+bool NoiseGenerator::getInvertColors() {
+  return invertColors;
+}
+
+void NoiseGenerator::setInvertColors(bool invert) {
+  this->invertColors = invert;
+}
+
 

@@ -17,6 +17,8 @@
 class NoiseGenerator {
   private:
     bool inverted;
+    bool invertColors;
+
     int numberOfPoints;
 
     ColorFunction    colorFunction;
@@ -51,6 +53,9 @@ class NoiseGenerator {
     void save(std::ostream& stream);
     bool getInverted();
     void setInverted(bool invert);
+
+    bool getInvertColors();
+    void setInvertColors(bool invert);
 };
 
 #endif

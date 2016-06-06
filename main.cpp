@@ -9,7 +9,7 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
 
     tgui::Panel::Ptr panel = theme->load("Panel");
     panel->setPosition({300, 750});
-    panel->setSize(925, 225);
+    panel->setSize(925, 250);
     gui.add(panel);
 
 //============ Label for Distance Function Combobox =================
@@ -101,6 +101,23 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
 
 // ===============================================================
 
+// ======== Label for Invert Colors Checkbox =====================
+     tgui::Label::Ptr invertColorsLabel = theme->load("Label");
+     invertColorsLabel->setText("Invert Colors:");
+     invertColorsLabel->setSize({200, 25});
+     invertColorsLabel->setPosition({25, 200});
+
+     panel->add(invertColorsLabel);
+// ===============================================================
+
+// ======== Invert Colors Checkbox ===============================
+   tgui::CheckBox::Ptr invertColorsCheckbox = theme->load("CheckBox");
+   invertColorsCheckbox->setSize({25, 20});
+   invertColorsCheckbox->setPosition({220, 200});
+
+   panel->add(invertColorsCheckbox);
+// ===============================================================
+
 // ======== Generate Button ======================================
     tgui::Button::Ptr button = theme->load("Button");
 
@@ -108,9 +125,10 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     button->setSize({400, 45});
     button->setPosition(440, 25);
 
-    button->connect("clicked", [&noiseGenerator, slider, colorFuncComboBox, distanceFuncComboBox, invertCheckbox]() {
+    button->connect("clicked", [&noiseGenerator, slider, colorFuncComboBox, distanceFuncComboBox, invertCheckbox, invertColorsCheckbox]() {
 
         noiseGenerator.setInverted(invertCheckbox->isChecked());
+        noiseGenerator.setInvertColors(invertColorsCheckbox->isChecked());
         // set color function
         std::string colorFunction = colorFuncComboBox->getSelectedItem();
         std::string distanceFunction = distanceFuncComboBox->getSelectedItem();
