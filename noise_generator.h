@@ -16,6 +16,7 @@
 
 class NoiseGenerator {
   private:
+    bool inverted;
     int numberOfPoints;
 
     ColorFunction    colorFunction;
@@ -48,6 +49,8 @@ class NoiseGenerator {
     void draw(sf::RenderWindow& window);
     void generate();
     void save(std::ostream& stream);
+    bool getInverted();
+    void setInverted(bool invert);
 };
 
 #endif

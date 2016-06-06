@@ -9,7 +9,7 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
 
     tgui::Panel::Ptr panel = theme->load("Panel");
     panel->setPosition({300, 750});
-    panel->setSize(925, 170);
+    panel->setSize(925, 225);
     gui.add(panel);
 
 //============ Label for Distance Function Combobox =================
@@ -82,6 +82,25 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     panel->add(slider);
 // ===============================================================
 
+// ======== Label for Invert Distance Checkbox ===================
+    tgui::Label::Ptr invertDistanceLabel = theme->load("Label");
+    invertDistanceLabel->setText("Invert Distance:");
+    invertDistanceLabel->setSize({200, 25});
+    invertDistanceLabel->setPosition({25, 175});
+
+    panel->add(invertDistanceLabel);
+
+// ===============================================================
+
+// ======== Invert Distance Checkbox =============================
+    tgui::CheckBox::Ptr invertCheckbox = theme->load("CheckBox");
+
+    invertCheckbox->setSize({25, 20});
+    invertCheckbox->setPosition({220, 175});
+    panel->add(invertCheckbox);
+
+// ===============================================================
+
 // ======== Generate Button ======================================
     tgui::Button::Ptr button = theme->load("Button");
 
@@ -89,8 +108,9 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     button->setSize({400, 45});
     button->setPosition(440, 25);
 
-    button->connect("clicked", [&noiseGenerator, slider, colorFuncComboBox, distanceFuncComboBox]() {
+    button->connect("clicked", [&noiseGenerator, slider, colorFuncComboBox, distanceFuncComboBox, invertCheckbox]() {
 
+        noiseGenerator.setInverted(invertCheckbox->isChecked());
         // set color function
         std::string colorFunction = colorFuncComboBox->getSelectedItem();
         std::string distanceFunction = distanceFuncComboBox->getSelectedItem();

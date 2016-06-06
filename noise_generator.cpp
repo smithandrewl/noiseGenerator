@@ -157,7 +157,12 @@ void NoiseGenerator::generate() {
       current.y = y;
 
       distance = closestPoint(current);
-      color = colorFunc(distance);
+
+      if(inverted) {
+        color = colorFunc(255 - distance);
+      } else {
+        color = colorFunc(distance);
+      }
 
       pixels[base + 0] = color.r;
       pixels[base + 1] = color.g;
@@ -182,3 +187,12 @@ sf::Vector2i NoiseGenerator::getTopLeft() {
 void NoiseGenerator::setTopLeft(const sf::Vector2i& topLeft){
   this->topLeft = topLeft;
 }
+
+bool NoiseGenerator::getInverted() {
+  return inverted;
+}
+
+void NoiseGenerator::setInverted(bool inverted) {
+  this->inverted = inverted;
+}
+
