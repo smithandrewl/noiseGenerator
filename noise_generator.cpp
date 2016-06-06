@@ -73,6 +73,18 @@ void NoiseGenerator::setDistanceFunction(const DistanceFunction& distanceFunctio
     case Other:
       this->distanceFunc = other;
       break;
+    case OrthEuclidean:
+      this->distanceFunc = orthEuclideanDistance;
+      break;
+    case OrthManhattan:
+      this->distanceFunc = orthManhattanDistance;
+      break;
+    case OrthChebyshev:
+      this->distanceFunc = orthChebyshevDistance;
+      break;
+    case OrthOther:
+      this->distanceFunc = orthOtherDistance;
+      break;
   }
 }
 

@@ -34,18 +34,28 @@ int other(int x1, int y1, int x2, int y2) {
   return (xDiff * xDiff) + (yDiff * yDiff);
 }
 
-int orthEuclideanDistance(int x1, int y1, int x2, int y2) {
-  return 0;
+int orth(int x1, int y1, int x2, int y2, DistanceFunc f) {
+  int xDiff = abs(x1 - x2);
+  int yDiff = abs(y1 - y2);
+
+  if(yDiff > xDiff) {
+    return (0.41 * xDiff) + (0.941246 * yDiff);
+  } else {
+    return f(x1, y1, x2, y2);
+  }
 }
 
+int orthEuclideanDistance(int x1, int y1, int x2, int y2) {
+  return orth(x1, y1, x2, y2, euclideanDistance);
+}
 int orthManhattanDistance(int x1, int y1, int x2, int y2) {
-  return 0;
+  return orth(x1, y1, x2, y2, manhattanDistance);
 }
 
 int orthChebyshevDistance(int x1, int y1, int x2, int y2) {
-  return 0;
+  return orth(x1, y1, x2, y2, chebyshevDistance);
 }
 
 int orthOtherDistance(int x1, int y1, int x2, int y2) {
-  return 0;
+  return orth(x1, y1, x2, y2, other);
 }

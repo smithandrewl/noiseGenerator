@@ -30,10 +30,10 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     distanceFuncComboBox->addItem("Manhattan");
     distanceFuncComboBox->addItem("Chebyshev");
     distanceFuncComboBox->addItem("Other");
-    //distanceFuncComboBox->addItem("OrthEuclidean");
-    //distanceFuncComboBox->addItem("OrthManhattan");
-    //distanceFuncComboBox->addItem("OrthChebyshev");
-    //distanceFuncComboBox->addItem("OrthOther");
+    distanceFuncComboBox->addItem("OrthEuclidean");
+    distanceFuncComboBox->addItem("OrthManhattan");
+    distanceFuncComboBox->addItem("OrthChebyshev");
+    distanceFuncComboBox->addItem("OrthOther");
 
     distanceFuncComboBox->setSelectedItem("Euclidean");
     panel->add(distanceFuncComboBox);
@@ -121,7 +121,17 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
             distanceFunc = Chebyshev;
         } else if (distanceFunction == "Other") {
             distanceFunc = Other;
+        } else if (distanceFunction == "OrthEuclidean") {
+            distanceFunc = OrthEuclidean;
+        } else if (distanceFunction == "OrthManhattan") {
+            distanceFunc = OrthManhattan;
+        } else if (distanceFunction == "OrthChebyshev") {
+           distanceFunc = OrthChebyshev;
+        } else if (distanceFunction == "OrthOther") {
+          distanceFunc = OrthOther;
         }
+
+
         noiseGenerator.setDistanceFunction(distanceFunc);
         // set distance function
 

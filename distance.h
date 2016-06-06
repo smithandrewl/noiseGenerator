@@ -16,6 +16,7 @@ enum DistanceFunction {
   OrthOther
 };
 
+int orth(int x1, int y1, int x2, int y2, DistanceFunc f);
 int euclideanDistance(int x1, int y1, int x2, int y2);
 int manhattanDistance(int x1, int y1, int x2, int y2);
 int chebyshevDistance(int x1, int y1, int x2, int y2);
