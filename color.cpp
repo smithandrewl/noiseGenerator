@@ -32,25 +32,25 @@ sf::Color andColor(int value) {
 }
 
 sf::Color sinColor(int value) {
-  int gammaAdj  = 70;
+  int gammaAdj  = 70.0;
 
   float redPart   = 10.9;
   float greenPart =  5.9;
   float bluePart  = 20.5;
 
   return sf::Color(
-    (sin(value * redPart)   * 100) + gammaAdj,
-    (sin(value * greenPart) * 100) - gammaAdj,
-    (sin(value * bluePart)  * 100) + gammaAdj,
+    (sin(value * redPart)   * 100.0) + gammaAdj,
+    (sin(value * greenPart) * 100.0) - gammaAdj,
+    (sin(value * bluePart)  * 100.0) + gammaAdj,
     255
   );
 }
 
 sf::Color tanColor(int value) {
   return sf::Color(
-    tan(value * 30.00) * 100,
-    tan(value * 25.00) * 100,
-    tan(value * 30.07) * 100,
+    tan(value * 3.00) * 10.0,
+    tan(value * 3.00) * 100.0,
+    tan(value * 4.07) * 10.0,
     255
   );
 }
