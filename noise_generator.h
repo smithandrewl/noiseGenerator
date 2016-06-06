@@ -11,7 +11,7 @@
 #include "distance.h"
 #include "color.h"
 
-#define WIDTH 1680
+#define WIDTH  1680
 #define HEIGHT 1050
 
 class NoiseGenerator {
@@ -25,7 +25,8 @@ class NoiseGenerator {
     DistanceFunction distanceFunction;
 
     DistanceFunc distanceFunc;
-    ColorFunc          colorFunc;
+    ColorFunc    colorFunc;
+
     std::vector<sf::Vector2i>               points;
 
     sf::Uint8    pixels[WIDTH * HEIGHT * 4];
@@ -59,4 +60,3 @@ class NoiseGenerator {
 };
 
 #endif
-

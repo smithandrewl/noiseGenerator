@@ -36,7 +36,7 @@ sf::Color sinColor(int value) {
 
   float redPart   = 20.5;
   float greenPart =  5.9;
-  float bluePart  = 3.9;
+  float bluePart  =  3.9;
 
   return sf::Color(
     (sin(value * redPart)   * 10.0) - gammaAdj,
@@ -48,9 +48,9 @@ sf::Color sinColor(int value) {
 
 sf::Color tanColor(int value) {
   return sf::Color(
-    tan(value * 3.00) * 10.0,
+    tan(value * 3.00) *  10.0,
     tan(value * 3.00) * 100.0,
-    tan(value * 4.07) * 10.0,
+    tan(value * 4.07) *  10.0,
     255
   );
 }
@@ -68,18 +68,4 @@ sf::Color tanModSinColor(value) {
 
     return fin;
 }*/
-    /*
-    if(colorFunction == "Linear") {
-          colorFunc = Linear;
-        } else if(colorFunction == "Xor") {
-          colorFunc = Xor;
-        } else if(colorFunction == "Mod") {
-          colorFunc = Mod;
-        } else if(colorFunction == "And") {
-          colorFunc = And;
-        } else if(colorFunction == "Sin") {
-          colorFunc = Sin;
-        } else if(colorFunction == "Tan") {
-          colorFunc = Tan;
-        }
-    */
+

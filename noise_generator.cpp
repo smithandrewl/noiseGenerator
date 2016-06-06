@@ -13,13 +13,13 @@ NoiseGenerator::NoiseGenerator(const sf::Vector2i& topLeft, int numPoints) {
   colorFunc    = linearColor;
   distanceFunc = euclideanDistance;
 
+  numberOfPoints = numPoints;
+
   this->topLeft = topLeft;
 
   sprite.setPosition(topLeft.x, topLeft.y);
   texture.create(WIDTH, HEIGHT);
   sprite.setTexture(texture);
-
-  numberOfPoints = numPoints;
 
   generate();
 }
@@ -101,13 +101,19 @@ int NoiseGenerator::closestPoint(const sf::Vector2i& pixelLocation) {
   int closestDist = 255;
 
   for(int i = 0; i < points.size(); i++) {
+
     int xDiff = pixelLocation.x - points[i].x;
     int yDiff = pixelLocation.y - points[i].y;
 
-    bool inRange = (xDiff * xDiff) + (yDiff * yDiff) < 65025;
+    bool inRange = (xDiff * xDiff) + (yDiff * yDiff) < (255 * 255);
 
     if(inRange) {
-      int dist = distanceFunc(pixelLocation.x, pixelLocation.y, points[i].x, points[i].y);
+      int dist = distanceFunc(
+        pixelLocation.x,
+        pixelLocation.y,
+        points[i].x,
+        points[i].y
+      );
 
       if(dist < closestDist) {
         closestDist  = dist;
@@ -139,7 +145,6 @@ void NoiseGenerator::randomPoints(int count) {
 void NoiseGenerator::generate() {
   int distance;
   int base;
-  int normalized;
 
   sf::Color    color;
   sf::Vector2i closest;

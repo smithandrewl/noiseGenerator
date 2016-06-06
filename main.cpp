@@ -1,15 +1,17 @@
 #include <TGUI/TGUI.hpp>
 #include "noise_generator.h"
 
-#define MIN_POINTS   1
+#define MIN_POINTS    1
 #define MAX_POINTS 1000
 
 void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     auto theme = std::make_shared<tgui::Theme>("TGUI/widgets/Black.txt");
 
     tgui::Panel::Ptr panel = theme->load("Panel");
+
     panel->setPosition({300, 750});
     panel->setSize(860, 250);
+
     gui.add(panel);
 
 //============ Label for Distance Function Combobox =================
@@ -24,6 +26,7 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
 
 // =========== Distance Function Combobox ==========================
     tgui::ComboBox::Ptr distanceFuncComboBox = theme->load("ComboBox");
+
     distanceFuncComboBox->setSize({200, 30});
     distanceFuncComboBox->setPosition(220, 25);
     distanceFuncComboBox->addItem("Euclidean");
@@ -36,12 +39,14 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     distanceFuncComboBox->addItem("OrthOther");
 
     distanceFuncComboBox->setSelectedItem("Euclidean");
+
     panel->add(distanceFuncComboBox);
 // ================================================================
 
 
 // =========== Label for Color Function Combobox ==================
     tgui::Label::Ptr colorFuncLabel = theme->load("Label");
+
     colorFuncLabel->setText("Color Function:");
     colorFuncLabel->setSize({200, 25});
     colorFuncLabel->setPosition(25, 75);
@@ -51,6 +56,7 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
 
 // ========== Color Function Combobox =============================
     tgui::ComboBox::Ptr colorFuncComboBox = theme->load("ComboBox");
+
     colorFuncComboBox->setSize({200, 30});
     colorFuncComboBox->setPosition(220, 75);
     colorFuncComboBox->addItem("Linear");
@@ -61,29 +67,35 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     colorFuncComboBox->addItem("Tan");
 
     colorFuncComboBox->setSelectedItem("Linear");
+
     panel->add(colorFuncComboBox);
 // ===============================================================
 
 // ========= Label for Number of Points Slider ===================
     tgui::Label::Ptr pointsLabel = theme->load("Label");
+
     pointsLabel->setText("Number of Points:");
     pointsLabel->setSize({200, 25});
     pointsLabel->setPosition(25, 125);
+
     panel->add(pointsLabel);
 // ===============================================================
 
 // ======== Number of Points Slider ==============================
     tgui::Slider::Ptr slider = theme->load("Slider");
+
     slider->setSize({200, 20});
     slider->setPosition(220, 125);
     slider->setMinimum(MIN_POINTS);
     slider->setMaximum(MAX_POINTS);
     slider->setValue(10);
+
     panel->add(slider);
 // ===============================================================
 
 // ======== Label for Invert Distance Checkbox ===================
     tgui::Label::Ptr invertDistanceLabel = theme->load("Label");
+
     invertDistanceLabel->setText("Invert Distance:");
     invertDistanceLabel->setSize({200, 25});
     invertDistanceLabel->setPosition({25, 170});
@@ -97,21 +109,24 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
 
     invertCheckbox->setSize({25, 20});
     invertCheckbox->setPosition({220, 170});
+
     panel->add(invertCheckbox);
 
 // ===============================================================
 
 // ======== Label for Invert Colors Checkbox =====================
-     tgui::Label::Ptr invertColorsLabel = theme->load("Label");
-     invertColorsLabel->setText("Invert Colors:");
-     invertColorsLabel->setSize({200, 25});
-     invertColorsLabel->setPosition({25, 210});
+   tgui::Label::Ptr invertColorsLabel = theme->load("Label");
 
-     panel->add(invertColorsLabel);
+   invertColorsLabel->setText("Invert Colors:");
+   invertColorsLabel->setSize({200, 25});
+   invertColorsLabel->setPosition({25, 210});
+
+   panel->add(invertColorsLabel);
 // ===============================================================
 
 // ======== Invert Colors Checkbox ===============================
    tgui::CheckBox::Ptr invertColorsCheckbox = theme->load("CheckBox");
+
    invertColorsCheckbox->setSize({25, 20});
    invertColorsCheckbox->setPosition({220, 210});
 
@@ -130,10 +145,10 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
         noiseGenerator.setInverted(invertCheckbox->isChecked());
         noiseGenerator.setInvertColors(invertColorsCheckbox->isChecked());
         // set color function
-        std::string colorFunction = colorFuncComboBox->getSelectedItem();
+        std::string colorFunction    = colorFuncComboBox->getSelectedItem();
         std::string distanceFunction = distanceFuncComboBox->getSelectedItem();
 
-        ColorFunction colorFunc = Linear;
+        ColorFunction    colorFunc    = Linear;
         DistanceFunction distanceFunc = Euclidean;
 
         if(colorFunction == "Linear") {
@@ -169,9 +184,7 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
           distanceFunc = OrthOther;
         }
 
-
         noiseGenerator.setDistanceFunction(distanceFunc);
-        // set distance function
 
         noiseGenerator.setNumberOfPoints(slider->getValue());
         noiseGenerator.generate();
