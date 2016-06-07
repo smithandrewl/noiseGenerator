@@ -33,10 +33,14 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     distanceFuncComboBox->addItem("Manhattan");
     distanceFuncComboBox->addItem("Chebyshev");
     distanceFuncComboBox->addItem("Other");
+    distanceFuncComboBox->addItem("Other1");
+    distanceFuncComboBox->addItem("Other2");
+    distanceFuncComboBox->addItem("Other3");
     distanceFuncComboBox->addItem("OrthEuclidean");
     distanceFuncComboBox->addItem("OrthManhattan");
     distanceFuncComboBox->addItem("OrthChebyshev");
     distanceFuncComboBox->addItem("OrthOther");
+    distanceFuncComboBox->addItem("Average");
 
     distanceFuncComboBox->setSelectedItem("Euclidean");
 
@@ -174,7 +178,14 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
             distanceFunc = Chebyshev;
         } else if (distanceFunction == "Other") {
             distanceFunc = Other;
-        } else if (distanceFunction == "OrthEuclidean") {
+        } else if (distanceFunction == "Other1") {
+            distanceFunc = Other1;
+        } else if (distanceFunction == "Other2") {
+            distanceFunc = Other2;
+        } else if (distanceFunction == "Other3") {
+            distanceFunc = Other3;
+        }
+        else if (distanceFunction == "OrthEuclidean") {
             distanceFunc = OrthEuclidean;
         } else if (distanceFunction == "OrthManhattan") {
             distanceFunc = OrthManhattan;

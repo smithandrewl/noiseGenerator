@@ -10,12 +10,20 @@ enum DistanceFunction {
   Manhattan,
   Chebyshev,
   Other,
+  Other1,
+  Other2,
+  Other3,
   OrthEuclidean,
   OrthManhattan,
   OrthChebyshev,
   OrthOther
 };
 
+int other1(int x1, int y1, int x2, int y2);
+int other2(int x1, int y1, int x2, int y2);
+int other3(int x1, int y1, int x2, int y2);
+
+int averageDistance(int x1, int y1, int x2, int y2);
 int orth(int x1, int y1, int x2, int y2, DistanceFunc f);
 int euclideanDistance(int x1, int y1, int x2, int y2);
 int manhattanDistance(int x1, int y1, int x2, int y2);

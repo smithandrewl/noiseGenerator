@@ -73,6 +73,15 @@ void NoiseGenerator::setDistanceFunction(const DistanceFunction& distanceFunctio
     case Other:
       this->distanceFunc = other;
       break;
+    case Other1:
+      this->distanceFunc = other1;
+      break;
+    case Other2:
+      this->distanceFunc = other2;
+      break;
+    case Other3:
+      this->distanceFunc = other3;
+      break;
     case OrthEuclidean:
       this->distanceFunc = orthEuclideanDistance;
       break;
@@ -85,6 +94,7 @@ void NoiseGenerator::setDistanceFunction(const DistanceFunction& distanceFunctio
     case OrthOther:
       this->distanceFunc = orthOtherDistance;
       break;
+
   }
 }
 
