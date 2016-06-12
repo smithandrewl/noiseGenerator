@@ -1,5 +1,6 @@
 #include <TGUI/TGUI.hpp>
 #include "noise_generator.h"
+#include <sstream>
 
 #define MIN_POINTS    1
 #define MAX_POINTS 1000
@@ -200,8 +201,25 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
         noiseGenerator.setNumberOfPoints(slider->getValue());
         noiseGenerator.generate();
     });
-
+    
     panel->add(button);
+// ===============================================================
+
+// ======== Save Button ==========================================
+    tgui::Button::Ptr saveBtn = theme->load("Button");
+    saveBtn->setText("Save");
+    saveBtn->setSize({400, 45});
+    saveBtn->setPosition({440, 100});
+
+    saveBtn->connect("clicked", [&noiseGenerator]() {
+      std::stringstream path;
+
+      path << "noise_" << rand() << ".png";
+      noiseGenerator.save(path.str());
+    });
+
+
+    panel->add(saveBtn);
 // ===============================================================
 }
 
@@ -210,7 +228,6 @@ int main()
     sf::Vector2i topLeft(10,10);
 
     NoiseGenerator noiseGenerator(topLeft, 10);
-
 
     sf::RenderWindow window{{1680, 1050}, "Noise Maker"};
     tgui::Gui gui{window}; // Create the gui and attach it to the window

@@ -197,8 +197,9 @@ void NoiseGenerator::generate() {
 
 }
 
-void save(std::ostream& stream) {
+void NoiseGenerator::save(std::string path) {
 
+  texture.copyToImage().saveToFile(path);
 }
 
 sf::Vector2i NoiseGenerator::getTopLeft() {

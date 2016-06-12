@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <functional>
+#include <string>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -51,7 +52,7 @@ class NoiseGenerator {
     void setNumberOfPoints(int numberOfPoints);
     void draw(sf::RenderWindow& window);
     void generate();
-    void save(std::ostream& stream);
+    void save(std::string path);
     bool getInverted();
     void setInverted(bool invert);
 
