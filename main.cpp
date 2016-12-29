@@ -70,8 +70,8 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
     colorFuncComboBox->addItem("And");
     colorFuncComboBox->addItem("Sin");
     colorFuncComboBox->addItem("Tan");
-
-    colorFuncComboBox->setSelectedItem("Linear");
+    colorFuncComboBox->addItem("Minty");
+    colorFuncComboBox->setSelectedItem("Minty");
 
     panel->add(colorFuncComboBox);
 // ===============================================================
@@ -168,6 +168,8 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
           colorFunc = Sin;
         } else if(colorFunction == "Tan") {
           colorFunc = Tan;
+        } else if(colorFunction == "Minty") {
+            colorFunc = Minty;
         }
         noiseGenerator.setColorFunction(colorFunc);
 
@@ -245,7 +247,6 @@ int main()
         }
 
         window.clear(sf::Color(19, 17, 17));
-
 
         noiseGenerator.draw(window);
         gui.draw(); // Draw all widgets

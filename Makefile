@@ -2,7 +2,7 @@
 CFLAGS= -fopenmp -O3 -Wall -std=c++11
 
 all: distance.o color.o noise_generator.o
-	$(CC) $(CFLAGS) -ltgui -lsfml-graphics -lsfml-window -lsfml-system distance.o color.o noise_generator.o main.cpp -o noiseMaker
+	$(CC) $(CFLAGS) main.cpp -ltgui -lsfml-window -lsfml-graphics -lsfml-system distance.o color.o noise_generator.o  -o noiseMaker
 clean:
 	rm noiseMaker
 	rm -rf *.o

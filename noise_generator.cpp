@@ -50,6 +50,8 @@ void NoiseGenerator::setColorFunction(const ColorFunction& colorFunction) {
     case Tan:
       colorFunc = tanColor;
       break;
+    case Minty:
+      colorFunc = mintyColor;
   }
 }
 

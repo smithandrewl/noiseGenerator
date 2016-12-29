@@ -1,5 +1,7 @@
 #include "color.h"
 
+using namespace std;  
+
 sf::Color linearColor(int value) {
   return sf::Color(value, value, value, 255);
 }
@@ -55,17 +57,19 @@ sf::Color tanColor(int value) {
   );
 }
 
-/*
-sf::Color tanModSinColor(value) {
-    int value = std::min(255, distance);
-    var oct1 = tanColor(value);
-    var oct1 = [oct1[0] * 0.125, oct1[1] * 0.125, oct1[2] * 0.125];
-    var oct2 = modColor(value);
-    var oct3 = sinColor(value);
-    var oct3 = [oct3[0] * 0.25, oct3[1] * 0.25, oct3[2] * 0.25];
 
-    var fin = [(oct1[0] + oct2[0] + oct3[0]) / 3, (oct1[1] + oct2[1] + oct3[1]) / 3, + (oct1[2] + oct2[2] + oct3[2]) / 3, 255];
+sf::Color mintyColor(int distance) {
+    int value = distance * 2;
+    sf::Color oct1 = sinColor(value);
+    
+    sf::Color oct2 = modColor(value * 3);
 
+    sf::Color oct3 = xorColor(value);
+
+
+    sf::Color fin = sf::Color((oct1.r  + oct2.r + oct3.r) / 3, (oct1.g  + oct2.g + oct3.g) / 3, + (oct1.b   + oct2.b + oct3.b) / 3, 255);
+
+    fin = sf::Color( max(0, 255 - fin.r), max(0, 255 - fin.g), max(0, 255 - fin.b), 255);
     return fin;
-}*/
+}
 

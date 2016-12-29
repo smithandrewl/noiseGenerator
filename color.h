@@ -13,7 +13,8 @@ enum ColorFunction {
   Mod,
   And,
   Sin,
-  Tan
+  Tan,
+  Minty
 };
 
 sf::Color linearColor(int value);
@@ -22,5 +23,6 @@ sf::Color modColor(int value);
 sf::Color andColor(int value);
 sf::Color sinColor(int value);
 sf::Color tanColor(int value);
+sf::Color mintyColor(int value);
 
 #endif
