@@ -5,12 +5,30 @@
 #include <omp.h>
 
 NoiseGenerator::NoiseGenerator(const sf::Vector2i& topLeft, int numPoints) {
+
+  colorFunctions.insert(std::make_pair(std::string("Linear"), linearColor));
+  colorFunctions.insert(std::make_pair(std::string("Xor"),    xorColor));
+  colorFunctions.insert(std::make_pair(std::string("Mod"),    modColor));
+  colorFunctions.insert(std::make_pair(std::string("And"),    andColor));
+  colorFunctions.insert(std::make_pair(std::string("Sin"),    sinColor));
+  colorFunctions.insert(std::make_pair(std::string("Tan"),    tanColor));
+  colorFunctions.insert(std::make_pair(std::string("Minty"),  mintyColor));
+
+  distanceFunctions.insert(std::make_pair(std::string("Euclidean"),     euclideanDistance));
+  distanceFunctions.insert(std::make_pair(std::string("Manhattan"),     manhattanDistance));
+  distanceFunctions.insert(std::make_pair(std::string("Chebyshev"),     chebyshevDistance));
+  distanceFunctions.insert(std::make_pair(std::string("Other"),         other));
+  distanceFunctions.insert(std::make_pair(std::string("Other1"),        other1));
+  distanceFunctions.insert(std::make_pair(std::string("Other2"),        other2));
+  distanceFunctions.insert(std::make_pair(std::string("Other3"),        other3));
+  distanceFunctions.insert(std::make_pair(std::string("OrthEuclidean"), orthEuclideanDistance));
+  distanceFunctions.insert(std::make_pair(std::string("OrthManhattan"), orthManhattanDistance));
+  distanceFunctions.insert(std::make_pair(std::string("OrthChebyshev"), orthChebyshevDistance));
+  distanceFunctions.insert(std::make_pair(std::string("OrthOther"),     orthOtherDistance));
+
   srand(time(NULL));
 
-  colorFunction    = Linear;
-  distanceFunction = Euclidean;
-
-  colorFunc    = linearColor;
+  colorFunc    = mintyColor;
   distanceFunc = euclideanDistance;
 
   numberOfPoints = numPoints;
@@ -24,80 +42,32 @@ NoiseGenerator::NoiseGenerator(const sf::Vector2i& topLeft, int numPoints) {
   generate();
 }
 
-ColorFunction NoiseGenerator::getColorFunction() {
-  return colorFunction;
-}
+std::vector<std::string> NoiseGenerator::getColorFunctions() {
+  std::vector<std::string> names;
 
-void NoiseGenerator::setColorFunction(const ColorFunction& colorFunction) {
-  this->colorFunction = colorFunction;
-
-  switch(colorFunction) {
-    case Linear:
-      colorFunc = linearColor;
-      break;
-    case Xor:
-      colorFunc = xorColor;
-      break;
-    case Mod:
-      colorFunc = modColor;
-      break;
-    case And:
-      colorFunc = andColor;
-      break;
-    case Sin:
-      colorFunc = sinColor;
-      break;
-    case Tan:
-      colorFunc = tanColor;
-      break;
-    case Minty:
-      colorFunc = mintyColor;
+  for(auto pair : colorFunctions) {
+    names.push_back(pair.first);
   }
+
+  return names;
 }
 
-DistanceFunction NoiseGenerator::getDistanceFunction() {
-  return distanceFunction;
-}
+std::vector<std::string> NoiseGenerator::getDistanceFunctions() {
+  std::vector<std::string> names;
 
-void NoiseGenerator::setDistanceFunction(const DistanceFunction& distanceFunction) {
-  this->distanceFunction = distanceFunction;
-
-  switch(distanceFunction) {
-    case Euclidean:
-      this->distanceFunc = euclideanDistance;
-      break;
-    case Manhattan:
-      this->distanceFunc = manhattanDistance;
-      break;
-    case Chebyshev:
-      this->distanceFunc = chebyshevDistance;
-      break;
-    case Other:
-      this->distanceFunc = other;
-      break;
-    case Other1:
-      this->distanceFunc = other1;
-      break;
-    case Other2:
-      this->distanceFunc = other2;
-      break;
-    case Other3:
-      this->distanceFunc = other3;
-      break;
-    case OrthEuclidean:
-      this->distanceFunc = orthEuclideanDistance;
-      break;
-    case OrthManhattan:
-      this->distanceFunc = orthManhattanDistance;
-      break;
-    case OrthChebyshev:
-      this->distanceFunc = orthChebyshevDistance;
-      break;
-    case OrthOther:
-      this->distanceFunc = orthOtherDistance;
-      break;
-
+  for(auto pair: distanceFunctions) {
+    names.push_back(pair.first);
   }
+
+  return names;
+}
+
+void NoiseGenerator::setColorFunction(const std::string& colorFunction) {
+  colorFunc = colorFunctions[colorFunction];
+}
+
+void NoiseGenerator::setDistanceFunction(const std::string& distanceFunction) {
+  distanceFunc = distanceFunctions[distanceFunction];
 }
 
 int NoiseGenerator::getNumberOfPoints() {

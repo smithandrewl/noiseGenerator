@@ -30,18 +30,11 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
 
     distanceFuncComboBox->setSize({200, 30});
     distanceFuncComboBox->setPosition(220, 25);
-    distanceFuncComboBox->addItem("Euclidean");
-    distanceFuncComboBox->addItem("Manhattan");
-    distanceFuncComboBox->addItem("Chebyshev");
-    distanceFuncComboBox->addItem("Other");
-    distanceFuncComboBox->addItem("Other1");
-    distanceFuncComboBox->addItem("Other2");
-    distanceFuncComboBox->addItem("Other3");
-    distanceFuncComboBox->addItem("OrthEuclidean");
-    distanceFuncComboBox->addItem("OrthManhattan");
-    distanceFuncComboBox->addItem("OrthChebyshev");
-    distanceFuncComboBox->addItem("OrthOther");
-    distanceFuncComboBox->addItem("Average");
+
+
+    for(std::string name : noiseGenerator.getDistanceFunctions()) {
+        distanceFuncComboBox->addItem(name);
+    }
 
     distanceFuncComboBox->setSelectedItem("Euclidean");
 
@@ -64,13 +57,11 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
 
     colorFuncComboBox->setSize({200, 30});
     colorFuncComboBox->setPosition(220, 75);
-    colorFuncComboBox->addItem("Linear");
-    colorFuncComboBox->addItem("Xor");
-    colorFuncComboBox->addItem("Mod");
-    colorFuncComboBox->addItem("And");
-    colorFuncComboBox->addItem("Sin");
-    colorFuncComboBox->addItem("Tan");
-    colorFuncComboBox->addItem("Minty");
+
+    for(std::string name : noiseGenerator.getColorFunctions()) {
+        colorFuncComboBox->addItem(name);
+    }
+
     colorFuncComboBox->setSelectedItem("Minty");
 
     panel->add(colorFuncComboBox);
@@ -149,56 +140,13 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
 
         noiseGenerator.setInverted(invertCheckbox->isChecked());
         noiseGenerator.setInvertColors(invertColorsCheckbox->isChecked());
+
         // set color function
         std::string colorFunction    = colorFuncComboBox->getSelectedItem();
         std::string distanceFunction = distanceFuncComboBox->getSelectedItem();
 
-        ColorFunction    colorFunc    = Linear;
-        DistanceFunction distanceFunc = Euclidean;
-
-        if(colorFunction == "Linear") {
-          colorFunc = Linear;
-        } else if(colorFunction == "Xor") {
-          colorFunc = Xor;
-        } else if(colorFunction == "Mod") {
-          colorFunc = Mod;
-        } else if(colorFunction == "And") {
-          colorFunc = And;
-        } else if(colorFunction == "Sin") {
-          colorFunc = Sin;
-        } else if(colorFunction == "Tan") {
-          colorFunc = Tan;
-        } else if(colorFunction == "Minty") {
-            colorFunc = Minty;
-        }
-        noiseGenerator.setColorFunction(colorFunc);
-
-        if(distanceFunction == "Euclidean") {
-            distanceFunc = Euclidean;
-        } else if (distanceFunction == "Manhattan") {
-            distanceFunc = Manhattan;
-        } else if (distanceFunction == "Chebyshev") {
-            distanceFunc = Chebyshev;
-        } else if (distanceFunction == "Other") {
-            distanceFunc = Other;
-        } else if (distanceFunction == "Other1") {
-            distanceFunc = Other1;
-        } else if (distanceFunction == "Other2") {
-            distanceFunc = Other2;
-        } else if (distanceFunction == "Other3") {
-            distanceFunc = Other3;
-        }
-        else if (distanceFunction == "OrthEuclidean") {
-            distanceFunc = OrthEuclidean;
-        } else if (distanceFunction == "OrthManhattan") {
-            distanceFunc = OrthManhattan;
-        } else if (distanceFunction == "OrthChebyshev") {
-           distanceFunc = OrthChebyshev;
-        } else if (distanceFunction == "OrthOther") {
-          distanceFunc = OrthOther;
-        }
-
-        noiseGenerator.setDistanceFunction(distanceFunc);
+        noiseGenerator.setColorFunction(colorFunction);
+        noiseGenerator.setDistanceFunction(distanceFunction);
 
         noiseGenerator.setNumberOfPoints(slider->getValue());
         noiseGenerator.generate();

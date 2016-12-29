@@ -7,15 +7,6 @@
 
 typedef std::function<sf::Color (int)> ColorFunc;
 
-enum ColorFunction {
-  Linear,
-  Xor,
-  Mod,
-  And,
-  Sin,
-  Tan,
-  Minty
-};
 
 sf::Color linearColor(int value);
 sf::Color xorColor(int value);

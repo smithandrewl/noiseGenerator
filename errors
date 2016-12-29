@@ -1,0 +1,2 @@
+g++ -fopenmp -O3 -Wall -std=c++11 -c noise_generator.cpp
+Makefile:11: recipe for target 'noise_generator.o' failed

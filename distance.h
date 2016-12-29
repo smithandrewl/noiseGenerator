@@ -5,19 +5,6 @@
 
 typedef std::function<int (int, int, int, int)> DistanceFunc;
 
-enum DistanceFunction {
-  Euclidean,
-  Manhattan,
-  Chebyshev,
-  Other,
-  Other1,
-  Other2,
-  Other3,
-  OrthEuclidean,
-  OrthManhattan,
-  OrthChebyshev,
-  OrthOther
-};
 
 int other1(int x1, int y1, int x2, int y2);
 int other2(int x1, int y1, int x2, int y2);
