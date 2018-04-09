@@ -11,7 +11,7 @@ A worley noise generator in C++ using SFML, TGUI and OpenMP.
 ![Alt text](saved/noise_1512649352.png?raw=true "2")
 
 ## 3
-![Alt text](saved/noise_1666095627.png?raw=true "3")
+![Alt text](saved/pink_and_blue.png?raw=true "3")
 
 ## 4
 ![Alt text](saved/noise_1920768939.png?raw=true "4")

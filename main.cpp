@@ -10,7 +10,7 @@ void loadWidgets(NoiseGenerator& noiseGenerator, tgui::Gui& gui) {
 
     tgui::Panel::Ptr panel = theme->load("Panel");
 
-    panel->setPosition({300, 750});
+    panel->setPosition({300, 650});
     panel->setSize(860, 250);
 
     gui.add(panel);
